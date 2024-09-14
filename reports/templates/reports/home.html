@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neighborhood Watch</title>
+</head>
+<body>
+    <h1>Welcome to Neighborhood Watch</h1>
+    
+    {% if is_authenticated %}
+        <p>Logged in as: {{ user.username }} <a href="{% url 'logout' %}">Logout</a></p>
+    {% else %}
+        <p><a href="{% url 'login' %}">Login</a> | <a href="{% url 'register' %}">Register</a></p>
+    {% endif %}
+
+    <h2>Latest Incidents</h2>
+    <ul>
+    {% for incident in latest_incidents %}
+        <li>{{ incident.title }} - {{ incident.date_reported|date:"F d, Y H:i" }} - Status: {{ incident.get_status_display }}</li>
+    {% empty %}
+        <li>No incidents reported yet.</li>
+    {% endfor %}
+    </ul>
+
+    {% if is_authenticated %}
+        <a href="{% url 'report_incident' %}">Report an Incident</a>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ incident.title }}</h1>
+<p>Reported on: {{ incident.created_at|date:"F d, Y" }}</p>
+<p>Description: {{ incident.description }}</p>
+<p>Location: {{ incident.location }}</p>
+<!-- Add more incident details as needed -->
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
+{% endblock %}

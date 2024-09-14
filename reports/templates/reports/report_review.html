@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Review Report: {{ incident.title }}</h1>
+<p>Reported by: {{ incident.reported_by.username }} on {{ incident.date_reported|date:"F d, Y H:i" }}</p>
+<p>Status: {{ incident.get_status_display }}</p>
+<p>Description: {{ incident.description }}</p>
+<p>Location: {{ incident.location }}</p>
+<p>Incident Type: {{ incident.incident_type }}</p>
+<p>Date Occurred: {{ incident.date_occurred|date:"F d, Y H:i" }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" name="action" value="approve">Approve</button>
+    <button type="submit" name="action" value="reject">Reject</button>
+    <button type="submit" name="action" value="escalate">Escalate to Law Enforcement</button>
+    <button type="submit" name="action" value="resolve">Mark as Resolved</button>
+</form>
+{% endblock %}

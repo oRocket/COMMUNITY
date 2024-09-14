@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Dashboard</h1>
+<h2>All Reported Incidents</h2>
+<ul>
+    {% for incident in incidents %}
+    <li>
+        <a href="{% url 'incident_detail' incident.id %}">
+            {{ incident.title }} - {{ incident.created_at|date:"F d, Y" }}
+        </a>
+    </li>
+    {% empty %}
+    <li>No incidents reported yet.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'report_incident' %}">Report New Incident</a>
+{% endblock %}

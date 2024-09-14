@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Community Leader Dashboard</h1>
+
+<h2>Pending Reports</h2>
+<ul>
+{% for report in pending_reports %}
+    <li><a href="{% url 'review_report' report.id %}">{{ report.title }}</a> - {{ report.date_reported|date:"F d, Y H:i" }}</li>
+{% empty %}
+    <li>No pending reports.</li>
+{% endfor %}
+</ul>
+
+<h2>Active Reports</h2>
+<ul>
+{% for report in active_reports %}
+    <li><a href="{% url 'review_report' report.id %}">{{ report.title }}</a> - {{ report.get_status_display }}</li>
+{% empty %}
+    <li>No active reports.</li>
+{% endfor %}
+</ul>
+
+<h2>Resolved Reports</h2>
+<ul>
+{% for report in resolved_reports %}
+    <li>{{ report.title }} - Resolved on {{ report.reviewed_by.date_joined|date:"F d, Y" }}</li>
+{% empty %}
+    <li>No resolved reports.</li>
+{% endfor %}
+</ul>
+{% endblock %}
