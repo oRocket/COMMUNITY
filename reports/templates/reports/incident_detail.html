@@ -2,9 +2,15 @@
 
 {% block content %}
 <h1>{{ incident.title }}</h1>
-<p>Posted by: {{ incident.user.username }}</p>  <!-- Display the user who posted the incident -->
-<p>{{ incident.description }}</p>
+<p>Description: {{ incident.description }}</p>
+<p>Reported by: {{ incident.reported_by.username }}</p>
 <p>Location: {{ incident.location }}</p>
+<p>Type: {{ incident.incident_type }}</p>
+<p>Status: {{ incident.status }}</p>
+<p>Date Occurred: {{ incident.date_occurred|date:"F d, Y" }}</p>
+<p>Date Reported: {{ incident.date_reported|date:"F d, Y" }}</p>
+<p>Reviewed by: {{ incident.reviewed_by.username }}</p>
+
 <!-- Add more incident details as needed -->
 <h2>Comments</h2>
 <ul>
