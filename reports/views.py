@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Incident
+from .models import Incident, Comment
 from .forms import CustomUserCreationForm, IncidentForm  # Import both forms
 
 # Home page view
@@ -35,10 +35,15 @@ def dashboard(request):
 
 # Incident detail view
 def incident_detail(request, incident_id):
-    if not request.user.is_authenticated:
-        return redirect('login')
-    incident = Incident.objects.get(pk=incident_id)
-    return render(request, 'reports/incident_detail.html', {'incident': incident})
+    incident = get_object_or_404(Incident, id=incident_id)
+    comments = incident.comments.all()  # Fetch comments for the incident
+
+    if request.method == 'POST':
+        comment_content = request.POST.get('content')
+        Comment.objects.create(incident=incident, user=request.user, content=comment_content)
+        return redirect('incident_detail', incident_id=incident.id)
+
+    return render(request, 'reports/incident_detail.html', {'incident': incident, 'comments': comments})
 
 # User registration view
 def register(request):

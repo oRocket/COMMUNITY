@@ -6,9 +6,14 @@
 <ul>
     {% for incident in incidents %}
     <li>
-        <a href="{% url 'incident_detail' incident.id %}">
-            {{ incident.title }} - {{ incident.created_at|date:"F d, Y" }}
-        </a>
+        <h3><a href="{% url 'incident_detail' incident.id %}">{{ incident.title }}</a></h3>
+        <p>{{ incident.description }}</p>
+        <h4>Comments:</h4>
+        <ul>
+            {% for comment in incident.comments.all %}
+                <li>{{ comment.user.username }}: {{ comment.content }}</li>
+            {% endfor %}
+        </ul>
     </li>
     {% empty %}
     <li>No incidents reported yet.</li>
