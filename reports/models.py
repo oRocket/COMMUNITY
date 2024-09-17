@@ -28,7 +28,7 @@ class Incident(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     location = models.CharField(max_length=200)
-    incident_type = models.CharField(max_length=100, default='default_value')  # Specify a default value
+    incident_type = models.CharField(max_length=100, choices=INCIDENT_TYPE_CHOICES, default='other')
     date_occurred = models.DateTimeField(default=timezone.now)
     date_reported = models.DateTimeField(auto_now_add=True)
     reported_by = models.ForeignKey(User, on_delete=models.CASCADE)

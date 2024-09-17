@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Incident, Comment
-from .forms import CustomUserCreationForm, IncidentForm  # Import both forms
+from .forms import CustomUserCreationForm, IncidentForm, EditIncidentForm  # Import both forms
 
 # Home page view
 def home(request):
@@ -107,3 +107,23 @@ def review_report(request, incident_id):
             # TODO: Add logic to send email/SMS for escalation
         return redirect('leader_dashboard')
     return render(request, 'reports/review_report.html', {'incident': incident})
+
+# View to edit an incident
+def edit_incident(request, incident_id):
+    incident = get_object_or_404(Incident, id=incident_id)
+    if request.method == 'POST':
+        form = EditIncidentForm(request.POST, instance=incident)
+        if form.is_valid():
+            form.save()
+            return redirect('incident_detail', incident_id=incident.id)
+    else:
+        form = EditIncidentForm(instance=incident)
+    return render(request, 'edit_incident.html', {'form': form})
+
+# View to delete an incident
+def delete_incident(request, incident_id):
+    incident = get_object_or_404(Incident, id=incident_id)
+    if request.method == 'POST':
+        incident.delete()
+        return redirect('incident_list')
+    return render(request, 'confirm_delete.html', {'incident': incident})

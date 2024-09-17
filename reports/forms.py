@@ -17,4 +17,10 @@ class CustomUserCreationForm(UserCreationForm):
 class IncidentForm(forms.ModelForm):
     class Meta:
         model = Incident
-        fields = ['title', 'description', 'location', 'status']
+        fields = ['title', 'description', 'location', 'status', 'incident_type']
+
+# Add a new form for editing incidents
+class EditIncidentForm(forms.ModelForm):
+    class Meta:
+        model = Incident
+        fields = ['title', 'description', 'location', 'status', 'incident_type']
