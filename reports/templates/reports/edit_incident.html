@@ -1,0 +1,17 @@
+<!-- neighborhood_watch/reports/templates/reports/edit_incident.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Incident</title>
+</head>
+<body>
+    <h1>Edit Incident</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+    <a href="{% url 'incident_detail' incident.id %}">Cancel</a>
+</body>
+</html>

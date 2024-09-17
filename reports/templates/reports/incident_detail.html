@@ -25,4 +25,13 @@
     <button type="submit">Add Comment</button>
 </form>
 <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+
+{% if incident.reported_by == request.user %}
+    <a href="{% url 'edit_incident' incident.id %}">Edit</a>
+    <form action="{% url 'delete_incident' incident.id %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+{% endif %}
+
 {% endblock %}

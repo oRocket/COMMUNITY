@@ -109,8 +109,9 @@ def review_report(request, incident_id):
     return render(request, 'reports/review_report.html', {'incident': incident})
 
 # View to edit an incident
+@login_required
 def edit_incident(request, incident_id):
-    incident = get_object_or_404(Incident, id=incident_id)
+    incident = get_object_or_404(Incident, id=incident_id, reported_by=request.user)  # Ensure the user is the reporter
     if request.method == 'POST':
         form = EditIncidentForm(request.POST, instance=incident)
         if form.is_valid():
@@ -118,12 +119,19 @@ def edit_incident(request, incident_id):
             return redirect('incident_detail', incident_id=incident.id)
     else:
         form = EditIncidentForm(instance=incident)
-    return render(request, 'edit_incident.html', {'form': form})
+    
+    print("Rendering template: reports/edit_incident.html")  # Debugging line
+    return render(request, 'reports/edit_incident.html', {'form': form, 'incident': incident})  # Pass incident to context
 
 # View to delete an incident
+@login_required
 def delete_incident(request, incident_id):
-    incident = get_object_or_404(Incident, id=incident_id)
+    incident = get_object_or_404(Incident, id=incident_id, reported_by=request.user)
     if request.method == 'POST':
         incident.delete()
-        return redirect('incident_list')
-    return render(request, 'confirm_delete.html', {'incident': incident})
+        return redirect('dashboard')  # Redirect to the list of incidents after deletion
+    return render(request, 'reports/dashboard.html', {'incident': incident})
+
+def incident_list(request):
+    incidents = Incident.objects.all()  # Fetch all incidents
+    return render(request, 'reports/incident_details.html', {'incidents': incidents})
