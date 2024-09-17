@@ -7,8 +7,8 @@
 <p>Location: {{ incident.location }}</p>
 <p>Type: {{ incident.incident_type }}</p>
 <p>Status: {{ incident.status }}</p>
-<p>Date Occurred: {{ incident.date_occurred|date:"F d, Y" }}</p>
-<p>Date Reported: {{ incident.date_reported|date:"F d, Y" }}</p>
+<p>Date Occurred: {{ incident.date_occurred|date:"F d, Y g:i A" }}</p>
+<p>Date Reported: {{ incident.date_reported|date:"F d, Y g:i A" }}</p>
 <p>Reviewed by: {{ incident.reviewed_by.username }}</p>
 
 <!-- Add more incident details as needed -->

@@ -9,7 +9,31 @@
     <h1>Edit Incident</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div>
+            <label for="id_title">Title:</label>
+            {{ form.title }}  <!-- Automatically renders the title input -->
+        </div>
+        <div>
+            <label for="id_description">Description:</label>
+            {{ form.description }}  <!-- Automatically renders the description input -->
+        </div>
+        <div>
+            <label for="id_location">Location:</label>
+            {{ form.location }}  <!-- Automatically renders the location input -->
+        </div>
+        <div>
+            <label for="incident.get_status_display">Incident Type:</label>
+            {{ form.status }}  <!-- Automatically renders the statusinput -->
+        </div>
+        <div>
+            <label for="id_incident_type">Incident Type:</label>
+            {{ form.incident_type }}  <!-- Automatically renders the incident type input -->
+        </div>
+        <div>
+            <label for="id_date_occurred">Date Occurred:</label>
+            <input type="datetime-local" name="date_occurred" id="id_date_occurred" required 
+                   value="{{ form.date_occurred.value|date:'Y-m-d\TH:i'|default:'' }}">
+        </div>
         <button type="submit">Save Changes</button>
     </form>
     <a href="{% url 'incident_detail' incident.id %}">Cancel</a>

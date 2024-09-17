@@ -29,7 +29,7 @@ class Incident(models.Model):
     description = models.TextField()
     location = models.CharField(max_length=200)
     incident_type = models.CharField(max_length=100, choices=INCIDENT_TYPE_CHOICES, default='other')
-    date_occurred = models.DateTimeField(default=timezone.now)
+    date_occurred = models.DateTimeField(default=timezone.now)  # This allows users to set the date and time
     date_reported = models.DateTimeField(auto_now_add=True)
     reported_by = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')

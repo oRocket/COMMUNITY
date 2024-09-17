@@ -113,14 +113,13 @@ def review_report(request, incident_id):
 def edit_incident(request, incident_id):
     incident = get_object_or_404(Incident, id=incident_id, reported_by=request.user)  # Ensure the user is the reporter
     if request.method == 'POST':
-        form = EditIncidentForm(request.POST, instance=incident)
+        form = IncidentForm(request.POST, instance=incident)
         if form.is_valid():
             form.save()
             return redirect('incident_detail', incident_id=incident.id)
     else:
-        form = EditIncidentForm(instance=incident)
+        form = IncidentForm(instance=incident)
     
-    print("Rendering template: reports/edit_incident.html")  # Debugging line
     return render(request, 'reports/edit_incident.html', {'form': form, 'incident': incident})  # Pass incident to context
 
 # View to delete an incident

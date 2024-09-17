@@ -17,10 +17,16 @@ class CustomUserCreationForm(UserCreationForm):
 class IncidentForm(forms.ModelForm):
     class Meta:
         model = Incident
-        fields = ['title', 'description', 'location', 'status', 'incident_type']
+        fields = ['title', 'description', 'location', 'status', 'incident_type', 'date_occurred']  # Include date_occurred
+        widgets = {
+            'date_occurred': forms.DateTimeInput(attrs={
+                'type': 'datetime-local',
+                'step': '2'  # Allows for seconds input
+            }),
+        }
 
 # Add a new form for editing incidents
 class EditIncidentForm(forms.ModelForm):
     class Meta:
         model = Incident
-        fields = ['title', 'description', 'location', 'status', 'incident_type']
+        fields = ['title', 'description', 'location', 'status', 'incident_type', 'date_occurred']
