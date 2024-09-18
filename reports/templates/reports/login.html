@@ -1,11 +1,57 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<h1>Login</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-</form>
-<p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+<!-- Background image -->
+<div id="intro" class="bg-image shadow-2-strong mask">
+  <div class="mask d-flex align-items-center h-100">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-6 col-md-10"> <!-- Changed to col-xl-6 and col-md-10 for a wider form -->
+          
+          <form class="bg-white rounded shadow-5-strong p-5 login" method="post">
+            <!-- Titles added here -->
+          <h3 class="text-center text-black">Welcome Back</h3>
+          <h3 class="text-center text-black">Login</h3>
+            {% csrf_token %}
+            <!-- Username input -->
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <input type="text" id="form1Example1" class="form-control" name="username" required />
+              <label class="form-label" for="form1Example1">Username</label>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <input type="password" id="form1Example2" class="form-control" name="password" required />
+              <label class="form-label" for="form1Example2">Password</label>
+            </div>
+
+            <!-- 2 column grid layout for inline styling -->
+            <div class="row mb-4">
+              <div class="col d-flex justify-content-center">
+                <!-- Checkbox -->
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
+                  <label class="form-check-label" for="form1Example3">Remember me</label>
+                </div>
+              </div>
+
+              <div class="col text-center">
+                <!-- Simple link -->
+                <a href="#!">Forgot password?</a>
+              </div>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block w-100" data-mdb-ripple-init>Login</button>
+            <br><br>
+            <!-- Registration prompt -->
+            <p class="col text-center">Don't have an account? <a href="{% url 'register' %}">Register here</a></p> <!-- Moved inside the form -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Background image -->
 {% endblock %}
