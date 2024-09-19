@@ -68,8 +68,8 @@ body {
 }
 
 .reg {
-    background-image: url('/static/images/login.jpg'); /* Use a direct path or relative path */
-    height: auto;
+    background-image: url('/static/images/register.jpg'); /* Use a direct path or relative path */
+    height: 100vh;
 }
 
 .h-100 {
