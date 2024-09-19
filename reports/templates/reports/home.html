@@ -2,8 +2,114 @@
 {% load static %}
 
 {% block content %}
+    <style>
+        .carousel, .carousel-item {
+            height: 100vh; /* Set the height to 100vh */
+        }
+        .carousel-item img {
+            object-fit: cover; /* Ensure the image covers the entire area */
+            height: 100%; /* Make sure the image takes full height */
+        }
+        .top-caption {
+            background-color: rgba(0, 0, 0, 0.7); /* Dark transparent background */
+            color: white; /* Set text color to white */
+            padding: 3rem;
+            position: absolute; /* Absolute position */
+            top: 20%; /* Position from the top */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Center the caption */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center; /* Center text */
+            width: 50%; /* Full width */
+            border-radius: 1rem;
+            font-family: 'Kanit', sans-serif;
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 400;
+            z-index: 10; /* Ensure it appears above the carousel images */
+        }
+        .register-button {
+            margin-top: 1rem; /* Space between text and button */
+            background-color: darkgoldenrod; /* Button background color */
+            color: white; /* Button text color */
+            border: none; /* Remove border */
+            padding: 0.4rem 1rem; /* Button padding */
+            cursor: pointer; /* Pointer cursor on hover */
+            text-decoration: none; /* Remove underline */
+            border-radius: 5px; /* Rounded corners */
+            font-family: 'Kanit', sans-serif;
+            font-size: 1.6rem;
+            font-style: normal;
+            font-weight: 400;
+        }
+        .carousel-caption h5 {
+            background-color: rgb(29, 53, 87); /* Set background color to dark gold */
+            color: white; /* Set text color to white */
+            padding: 1rem 1.5rem; /* Add some padding for better visibility */
+            white-space: nowrap; /* Prevent text wrapping */
+            display: inline-block; /* Allow width to fit content */
+            border-radius: 1rem;
+        }
+        .carousel-caption p {
+            background-color: rgb(69, 123, 157); /* Set background color to dark gold */
+            color: white; /* Set text color to white */
+            padding: 0.8rem 1.2rem; /* Add some padding for better visibility */
+            white-space: nowrap; /* Prevent text wrapping */
+            display: inline-block; /* Allow width to fit content */
+            border-radius: 1rem;
+            font-family: 'Kanit', sans-serif;
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 400;
+        }
+    </style>
 
-    <h1>Welcome to Neighborhood Watch</h1>
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+      <div class="top-caption">
+        <h3>WELCOME TO COMMUNITY WATCH</h3>
+        <a href="{% url 'register' %}" class="register-button">Register</a>
+      </div>
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{% static 'images/hero-1.png' %}" class="d-block w-100" alt="Stay Informed, Stay Safe">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Stay Informed, Stay Safe</h5>
+            <p>Discover the latest incidents in your community and stay updated on community safety. Knowledge is your best defense.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'images/hero-2.jpg' %}" class="d-block w-100" alt="Join the Neighborhood Watch">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Join the Community Watch</h5>
+            <p>Become an active participant in your community. Report incidents and help keep your neighborhood safe for everyone.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'images/hero-3.jpg' %}" class="d-block w-100" alt="Your Voice Matters">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Your Voice Matters</h5>
+            <p>Every report counts! Share your experiences and contribute to a safer environment. Together, we can make a difference.</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
     <h2>Latest Incidents</h2>
     <ul>
     {% for incident in latest_incidents %}
