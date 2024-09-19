@@ -1,10 +1,153 @@
 {% extends 'base.html' %}
+{% load static %}  <!-- Load static files -->
+{% load custom_filters %}
 
 {% block content %}
-<h2>Register</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-</form>
+<section class="reg">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-4">
+            <div class="row justify-content-center">
+              <div class="col-md-12">
+
+                <h3 class="text-center fw-bold mb-4">Register</h3>
+
+                <form method="post" class="mx-1 mx-md-4 register-form">
+                  {% csrf_token %}
+
+                  <div class="row mb-3"> <!-- Start a new row for fields -->
+                    <!-- Username Field -->
+                    <div class="col-md-6"> <!-- Left column -->
+                      <div class="form-group">
+                        {{ form.username.label_tag }}
+                        {{ form.username|add_class:"form-control" }} <!-- Add Bootstrap class -->
+                        {% if form.username.errors %}
+                          <div class="text-danger">{{ form.username.errors }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+
+                    <!-- First Name Field -->
+                    <div class="col-md-6"> <!-- Right column -->
+                      <div class="form-group">
+                        {{ form.first_name.label_tag }}
+                        {{ form.first_name|add_class:"form-control" }}
+                        {% if form.first_name.errors %}
+                          <div class="text-danger">{{ form.first_name.errors }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3"> <!-- New row for the next set of fields -->
+                    <!-- Middle Name Field -->
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        {{ form.middle_name.label_tag }}
+                        {{ form.middle_name|add_class:"form-control" }}
+                        {% if form.middle_name.errors %}
+                          <div class="text-danger">{{ form.middle_name.errors }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+
+                    <!-- Last Name Field -->
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        {{ form.last_name.label_tag }}
+                        {{ form.last_name|add_class:"form-control" }}
+                        {% if form.last_name.errors %}
+                          <div class="text-danger">{{ form.last_name.errors }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3"> <!-- New row for the next set of fields -->
+                    <!-- Email Field -->
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        {{ form.email.label_tag }}
+                        {{ form.email|add_class:"form-control" }}
+                        {% if form.email.errors %}
+                          <div class="text-danger">{{ form.email.errors }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+
+                    <!-- Date of Birth Field -->
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        {{ form.date_of_birth.label_tag }}
+                        {{ form.date_of_birth|add_class:"form-control" }}
+                        {% if form.date_of_birth.errors %}
+                          <div class="text-danger">{{ form.date_of_birth.errors }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3"> <!-- New row for the password fields -->
+                    <!-- Password Field -->
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        {{ form.password1.label_tag }}
+                        {{ form.password1|add_class:"form-control" }} <!-- Add Bootstrap class -->
+                        {% if form.password1.errors %}
+                          <div class="text-danger">{{ form.password1.errors }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+
+                    <!-- Confirm Password Field -->
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        {{ form.password2.label_tag }}
+                        {{ form.password2|add_class:"form-control" }} <!-- Add Bootstrap class -->
+                        {% if form.password2.errors %}
+                          <div class="text-danger">{{ form.password2.errors }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Show/Hide Passwords Checkbox -->
+                  <div class="form-group mb-3 text-center"> <!-- Added text-center class -->
+                    <input type="checkbox" id="show-passwords" onclick="togglePasswordVisibility()">
+                    <label for="show-passwords">Show Passwords</label>
+                  </div>
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                  </div>
+                </form>
+
+                <!-- Login Link -->
+                <div class="text-center">
+                  <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function togglePasswordVisibility() {
+    const passwordFields = [
+        document.querySelector('input[name="password1"]'),
+        document.querySelector('input[name="password2"]')
+    ];
+    passwordFields.forEach(field => {
+        field.type = field.type === 'password' ? 'text' : 'password';
+    });
+}
+</script>
+
 {% endblock %}

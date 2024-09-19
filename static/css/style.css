@@ -63,10 +63,19 @@ body {
     padding-top: 0%;
 }
 
+.register {
+    height: auto;
+}
+
 .reg {
     background-image: url('/static/images/login.jpg'); /* Use a direct path or relative path */
-    background-size: cover; /* Ensures the background image covers the entire element */
-    background-position: center; /* Centers the image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    height: 100vh; /* Sets the height to cover the entire viewport height */
+    height: auto;
+}
+
+.h-100 {
+    height: auto;
+}
+
+.register-form {
+    height: auto;
 }
