@@ -3,10 +3,11 @@
 
 {% block content %}
     <style>
-        .carousel, .carousel-item {
+        {% comment %} .carousel,  {% endcomment %}
+        .hero-carousel-item {
             height: 100vh; /* Set the height to 100vh */
         }
-        .carousel-item img {
+        .hero-carousel-item img {
             object-fit: cover; /* Ensure the image covers the entire area */
             height: 100%; /* Make sure the image takes full height */
         }
@@ -150,6 +151,96 @@
         .status-rejected {
           background-color: #dc3545;
         }
+
+        {% comment %} WHY USE COMMUNITY WATCH {% endcomment %}
+        .why-use-section {
+          background-color: #f8f9fa;
+          padding: 3rem 0;
+          text-align: center;
+        }
+  
+        .why-use-section h2 {
+          margin-bottom: 2rem;
+          color: #333;
+          font-family: 'Kanit', sans-serif;
+        }
+  
+        .reasons-container {
+          display: flex;
+          justify-content: space-around;
+          flex-wrap: wrap;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+  
+        .reason-card {
+          flex-basis: calc(33.333% - 2rem);
+          background-color: white;
+          border-radius: 10px;
+          padding: 1.5rem;
+          margin: 1rem;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s ease;
+        }
+  
+        .reason-card:hover {
+          transform: translateY(-5px);
+        }
+  
+        .reason-card h3 {
+          color: #1d3557;
+          margin-bottom: 1rem;
+          font-family: 'Kanit', sans-serif;
+        }
+  
+        .reason-card p {
+          color: #4a4a4a;
+          font-size: 0.9rem;
+          line-height: 1.5;
+        }
+  
+        @media (max-width: 768px) {
+          .reason-card {
+              flex-basis: calc(50% - 2rem);
+          }
+        }
+  
+        @media (max-width: 480px) {
+          .reason-card {
+              flex-basis: 100%;
+          }
+          .incident-description {
+          max-width: 200px;
+        }
+
+        {% comment %} TESTIMONIES {% endcomment %}
+        .testimonials-section {
+          background-color: #f0f8ff;
+        }
+        .testimonial-card {
+          background-color: white;
+          padding: 1rem;
+          border-radius: 10px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          margin-bottom: 1rem;
+          height: 100%;
+        }
+        .testimonial-card p {
+          font-size: 0.9rem;
+          line-height: 1.4;
+        }
+        .testimonial-card span {
+          font-size: 0.8rem;
+        }
+        #testimonialCarousel .carousel-control-prev,
+        #testimonialCarousel .carousel-control-next {
+          width: 5%;
+        }
+        #testimonialCarousel .carousel-control-prev-icon,
+        #testimonialCarousel .carousel-control-next-icon {
+          background-color: rgba(0, 0, 0, 0.5);
+          border-radius: 50%;
+        }
     </style>
 
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
@@ -167,21 +258,21 @@
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
       <div class="carousel-inner">
-        <div class="carousel-item active">
+        <div class="carousel-item hero-carousel-item active">
           <img src="{% static 'images/hero-1.png' %}" class="d-block w-100" alt="Stay Informed, Stay Safe">
           <div class="carousel-caption d-none d-md-block">
             <h5>Stay Informed, Stay Safe</h5>
             <p>Discover the latest incidents in your community and stay updated on community safety.</p>
           </div>
         </div>
-        <div class="carousel-item">
+        <div class="carousel-item hero-carousel-item">
           <img src="{% static 'images/hero-2.jpg' %}" class="d-block w-100" alt="Join the Neighborhood Watch">
           <div class="carousel-caption d-none d-md-block">
             <h5>Join the Community Watch</h5>
             <p>Become an active participant in your community. Report incidents and help keep your neighborhood safe for everyone.</p>
           </div>
         </div>
-        <div class="carousel-item">
+        <div class="carousel-item hero-carousel-item">
           <img src="{% static 'images/hero-3.jpg' %}" class="d-block w-100" alt="Your Voice Matters">
           <div class="carousel-caption d-none d-md-block">
             <h5>Your Voice Matters</h5>
@@ -217,13 +308,94 @@
         </ul>
 
         {% if is_authenticated %}
-            <div class="mt-3">
-                <a href="{% url 'report_incident' %}" class="btn btn-success">Report an Incident</a>
-            </div>
+          <div class="mt-3 d-flex justify-content-center">
+            <a href="{% url 'report_incident' %}" class="btn btn-success">Report an Incident</a>
+          </div>
         {% endif %}
     </div>
 </div>
 
+{% comment %} User Testimonials {% endcomment %}
+<div class="testimonials-section py-4">
+  <div class="container">
+      <h2 class="text-center mb-4">What Our Users Say</h2>
+      <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+              <div class="carousel-item active">
+                  <div class="row">
+                      <div class="col-md-4">
+                          <div class="testimonial-card d-flex align-items-center">
+                              <img src="{% static 'images/user1.png' %}" alt="Sarah J." class="rounded-circle me-3" width="60" height="60">
+                              <div>
+                                  <p class="fst-italic mb-1">"Community Watch has made our neighborhood feel so much safer!"</p>
+                                  <span class="fw-bold">- Sarah J.</span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                          <div class="testimonial-card d-flex align-items-center">
+                              <img src="{% static 'images/user2.jpeg' %}" alt="Mike T." class="rounded-circle me-3" width="60" height="60">
+                              <div>
+                                  <p class="fst-italic mb-1">"I love how easy it is to stay informed about local incidents."</p>
+                                  <span class="fw-bold">- Mike T.</span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                          <div class="testimonial-card d-flex align-items-center">
+                              <img src="{% static 'images/user3.png' %}" alt="Emily R." class="rounded-circle me-3" width="60" height="60">
+                              <div>
+                                  <p class="fst-italic mb-1">"This platform has brought our community closer together."</p>
+                                  <span class="fw-bold">- Emily R.</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="carousel-item">
+                  <div class="row">
+                      <div class="col-md-4">
+                          <div class="testimonial-card d-flex align-items-center">
+                              <img src="{% static 'images/user4.jpg' %}" alt="David L." class="rounded-circle me-3" width="60" height="60">
+                              <div>
+                                  <p class="fst-italic mb-1">"Reporting incidents has never been easier. Great job!"</p>
+                                  <span class="fw-bold">- David L.</span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="testimonial-card d-flex align-items-center">
+                            <img src="{% static 'images/user4.jpg' %}" alt="David L." class="rounded-circle me-3" width="60" height="60">
+                            <div>
+                                <p class="fst-italic mb-1">"Reporting incidents has never been easier. Great job!"</p>
+                                <span class="fw-bold">- David L.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="testimonial-card d-flex align-items-center">
+                          <img src="{% static 'images/user2.jpeg' %}" alt="David L." class="rounded-circle me-3" width="60" height="60">
+                          <div>
+                              <p class="fst-italic mb-1">"Reporting incidents has never been easier. Great job!"</p>
+                              <span class="fw-bold">- David L.</span>
+                          </div>
+                      </div>
+                  </div>
+                      <!-- Add more testimonials here -->
+                  </div>
+              </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+          </button>
+      </div>
+  </div>
+</div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const incidentItems = document.querySelectorAll('.incident-item');
@@ -242,6 +414,15 @@
             const hue = Math.floor(Math.random() * 360);
             return `hsla(${hue}, 70%, 80%, 0.9)`;
         }
+    });
+
+    {% comment %} Testimonies {% endcomment %}
+    document.addEventListener('DOMContentLoaded', function() {
+      var testimonialCarousel = new bootstrap.Carousel(document.getElementById('testimonialCarousel'), {
+          interval: 5000,
+          wrap: true,
+          touch: true
+      });
     });
 </script>
 {% endblock %}
