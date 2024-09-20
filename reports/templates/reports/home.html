@@ -45,25 +45,47 @@
             font-style: normal;
             font-weight: 400;
         }
+        .dashboard-button {
+            margin-top: 1rem;
+            background-color: #28a745; /* Green color for dashboard button */
+            color: white;
+            border: none;
+            padding: 0.4rem 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            font-family: 'Kanit', sans-serif;
+            font-size: 1.6rem;
+            font-style: normal;
+            font-weight: 400;
+        }
+        .carousel-caption {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
         .carousel-caption h5 {
             background-color: rgb(29, 53, 87); /* Set background color to dark gold */
             color: white; /* Set text color to white */
             padding: 1rem 1.5rem; /* Add some padding for better visibility */
-            white-space: nowrap; /* Prevent text wrapping */
-            display: inline-block; /* Allow width to fit content */
+            display: inline-block;
             border-radius: 1rem;
         }
         .carousel-caption p {
             background-color: rgb(69, 123, 157); /* Set background color to dark gold */
             color: white; /* Set text color to white */
-            padding: 0.8rem 1.2rem; /* Add some padding for better visibility */
-            white-space: nowrap; /* Prevent text wrapping */
+            padding: 0.5rem 1rem; /* Add some padding for better visibility */
             display: inline-block; /* Allow width to fit content */
             border-radius: 1rem;
             font-family: 'Kanit', sans-serif;
             font-size: 1rem;
             font-style: normal;
             font-weight: 400;
+        }
+        {% comment %} Latest Incident {% endcomment %}
+        .latest-incident-header {
+          align-items: center;
+          text-align: center;
         }
         .incident-description {
           max-width: 250px; /* Set the maximum width */
@@ -73,15 +95,71 @@
           display: inline-block; /* Ensure it behaves like an inline element */
           vertical-align: middle; /* Align with other text */
         }
-        h2 {
-          text-align: center; /* Center text */
+        .latest-incidents-wrapper {
+          background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+          {% comment %} background-size: 400% 400%; {% endcomment %}
+          animation: gradient 15s ease infinite;
+          padding: 20px 0;
+          width: 100%;
+        }
+        .latest-incidents-container {
+          background: transparent;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+  
+        @keyframes gradient {
+          0% {
+              background-position: 0% 50%;
+          }
+          50% {
+              background-position: 100% 50%;
+          }
+          100% {
+              background-position: 0% 50%;
+          }
+        }
+  
+        .latest-incidents-container h2 {
+          color: white;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+  
+        .incident-item {
+          background-color: rgba(255, 255, 255, 0.9);
+          transition: background-color 0.3s ease, transform 0.2s ease;
+          margin-bottom: 10px;
+        }
+  
+        .incident-item:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+  
+        .status-approved {
+          background-color: #28a745;
+        }
+        .status-pending {
+          background-color: #ffc107;
+          color: #212529;
+        }
+        .status-resolved {
+          background-color: #007bff;
+        }
+        .status-rejected {
+          background-color: #dc3545;
         }
     </style>
 
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
       <div class="top-caption">
         <h3>WELCOME TO COMMUNITY WATCH</h3>
-        <a href="{% url 'register' %}" class="register-button">Register</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'dashboard' %}" class="dashboard-button">Dashboard</a>
+        {% else %}
+            <a href="{% url 'register' %}" class="register-button">Register</a>
+        {% endif %}
       </div>
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -93,7 +171,7 @@
           <img src="{% static 'images/hero-1.png' %}" class="d-block w-100" alt="Stay Informed, Stay Safe">
           <div class="carousel-caption d-none d-md-block">
             <h5>Stay Informed, Stay Safe</h5>
-            <p>Discover the latest incidents in your community and stay updated on community safety. Knowledge is your best defense.</p>
+            <p>Discover the latest incidents in your community and stay updated on community safety.</p>
           </div>
         </div>
         <div class="carousel-item">
@@ -121,26 +199,49 @@
       </button>
     </div>
 
-    <div class="container mt-5">
-      <h2>Latest Incidents</h2>
-      <ul class="list-group">
-      {% for incident in latest_incidents %}
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-              <div>
-                  <strong class="incident-description">{{ incident.title }}</strong> - <span class="incident-description">{{ incident.description }}</span> - <span class="incident-description">{{ incident.date_reported|date:"F d, Y H:i" }}</span> - <i class="incident-description">{{ incident.reported_by.username }}</i>
-              </div>
-              <span class="badge bg-primary rounded-pill">{{ incident.get_status_display }}</span>
-          </li>
-      {% empty %}
-          <li class="list-group-item">No incidents reported yet.</li>
-      {% endfor %}
-      </ul>
+{% comment %} LATEST INCIDENTS {% endcomment %}
+<div class="latest-incidents-wrapper">
+    <div class="container latest-incidents-container">
+        <h2 class="latest-incident-header">Latest Incidents</h2>
+        <ul class="list-group">
+        {% for incident in latest_incidents %}
+            <li class="list-group-item d-flex justify-content-between align-items-center incident-item">
+                <div>
+                    <strong class="incident-description">{{ incident.title }}</strong> - <span class="incident-description">{{ incident.description }}</span> - <span class="incident-description">{{ incident.date_reported|date:"F d, Y H:i" }}</span> - <i class="incident-description">{{ incident.reported_by.username }}</i>
+                </div>
+                <span class="badge rounded-pill status-{{ incident.status|lower }}">{{ incident.get_status_display }}</span>
+            </li>
+        {% empty %}
+            <li class="list-group-item">No incidents reported yet.</li>
+        {% endfor %}
+        </ul>
 
-      {% if is_authenticated %}
-          <div class="mt-3">
-              <a href="{% url 'report_incident' %}" class="btn btn-success">Report an Incident</a>
-          </div>
-      {% endif %}
-  </div>
+        {% if is_authenticated %}
+            <div class="mt-3">
+                <a href="{% url 'report_incident' %}" class="btn btn-success">Report an Incident</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const incidentItems = document.querySelectorAll('.incident-item');
+        
+        incidentItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = getRandomColor();
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+            });
+        });
+
+        function getRandomColor() {
+            const hue = Math.floor(Math.random() * 360);
+            return `hsla(${hue}, 70%, 80%, 0.9)`;
+        }
+    });
+</script>
 {% endblock %}
