@@ -30,7 +30,7 @@ def report_incident(request):
 # Dashboard view
 @login_required
 def dashboard(request):
-    incidents = Incident.objects.all()
+    incidents = Incident.objects.all().order_by('-date_reported')
     return render(request, 'reports/dashboard.html', {'incidents': incidents})
 
 # Incident detail view
