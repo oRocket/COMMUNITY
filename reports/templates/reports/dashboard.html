@@ -1,23 +1,70 @@
 {% extends 'base.html' %}
+{% load static %}
+
+<style>
+    
+</style>
 
 {% block content %}
-<h1>Dashboard</h1>
-<h2>All Reported Incidents</h2>
-<ul>
-    {% for incident in incidents %}
-    <li>
-        <h3><a href="{% url 'incident_detail' incident.id %}">{{ incident.title }}</a></h3>
-        <p>{{ incident.description }}</p>
-        <h4>Comments:</h4>
-        <ul>
-            {% for comment in incident.comments.all %}
-                <li>{{ comment.user.username }}: {{ comment.content }}</li>
+<div class="dashboard-content mt-5">
+    <div class="container">
+        <div class="row mb-4">
+            <br><br><br>
+            <div class="col d-flex justify-content-between align-items-center">
+                <p class="h4 fw-bold mb-0" id="greeting">Hello, {{ user.first_name }}!</p>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col">
+                <h2>All Reported Incidents</h2>
+            </div>
+            <div class="col-auto">
+                <a href="{% url 'report_incident' %}" class="btn btn-primary">Report New Incident</a>
+            </div>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for incident in incidents %}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{% static 'images/'|add:incident.incident_type|add:'.jpg' %}" class="card-img-top" alt="{{ incident.incident_type }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ incident.title }}</h5>
+                        <p class="card-text">{{ incident.description|truncatewords:20 }}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <small class="text-muted">Reported on {{ incident.date_reported|date:"F d, Y" }}</small>
+                        <a href="{% url 'incident_detail' incident.id %}" class="btn btn-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col">
+                <div class="alert alert-info" role="alert">
+                    No incidents reported yet.
+                </div>
+            </div>
             {% endfor %}
-        </ul>
-    </li>
-    {% empty %}
-    <li>No incidents reported yet.</li>
-    {% endfor %}
-</ul>
-<a href="{% url 'report_incident' %}">Report New Incident</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const greeting = document.getElementById('greeting');
+        const hour = new Date().getHours();
+        let greetingText;
+
+        if (hour < 12) {
+            greetingText = 'Good morning';
+        } else if (hour < 18) {
+            greetingText = 'Good afternoon';
+        } else {
+            greetingText = 'Good evening';
+        }
+
+        greeting.textContent = `${greetingText}, {{ user.first_name }}!`;
+    });
+</script>
 {% endblock %}

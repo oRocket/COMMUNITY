@@ -69,7 +69,10 @@ body {
 
 .reg {
     background-image: url('/static/images/register.jpg'); /* Use a direct path or relative path */
-    height: 100vh;
+    background-size: cover; /* Ensures the background image covers the entire element */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    height: 100vh; /* Sets the height to cover the entire viewport height */
 }
 
 .h-100 {
@@ -79,4 +82,3 @@ body {
 .register-form {
     height: auto;
 }
-
