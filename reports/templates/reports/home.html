@@ -328,19 +328,19 @@
                   <div class="row">
                       <div class="col-md-4">
                           <div class="testimonial-card d-flex align-items-center">
-                              <img src="{% static 'images/user1.png' %}" alt="Sarah J." class="rounded-circle me-3" width="60" height="60">
+                              <img src="{% static 'images/user1.jpeg' %}" alt="Sarah J." class="rounded-circle me-3" width="60" height="60">
                               <div>
                                   <p class="fst-italic mb-1">"Community Watch has made our neighborhood feel so much safer!"</p>
-                                  <span class="fw-bold">- Sarah J.</span>
+                                  <span class="fw-bold">- Sarah Addai</span>
                               </div>
                           </div>
                       </div>
                       <div class="col-md-4">
                           <div class="testimonial-card d-flex align-items-center">
-                              <img src="{% static 'images/user2.jpeg' %}" alt="Mike T." class="rounded-circle me-3" width="60" height="60">
+                              <img src="{% static 'images/user2.png' %}" alt="Mike T." class="rounded-circle me-3" width="60" height="60">
                               <div>
                                   <p class="fst-italic mb-1">"I love how easy it is to stay informed about local incidents."</p>
-                                  <span class="fw-bold">- Mike T.</span>
+                                  <span class="fw-bold">- Jennifer Forson</span>
                               </div>
                           </div>
                       </div>
@@ -349,7 +349,7 @@
                               <img src="{% static 'images/user3.png' %}" alt="Emily R." class="rounded-circle me-3" width="60" height="60">
                               <div>
                                   <p class="fst-italic mb-1">"This platform has brought our community closer together."</p>
-                                  <span class="fw-bold">- Emily R.</span>
+                                  <span class="fw-bold">- Alfred Boakye</span>
                               </div>
                           </div>
                       </div>
@@ -361,26 +361,26 @@
                           <div class="testimonial-card d-flex align-items-center">
                               <img src="{% static 'images/user4.jpg' %}" alt="David L." class="rounded-circle me-3" width="60" height="60">
                               <div>
-                                  <p class="fst-italic mb-1">"Reporting incidents has never been easier. Great job!"</p>
-                                  <span class="fw-bold">- David L.</span>
+                                  <p class="fst-italic mb-1">"I appreciate how easy it is to connect with my neighbors and report issues. This platform truly fosters community spirit!"</p>
+                                  <span class="fw-bold">- Matthew Osei</span>
                               </div>
                           </div>
                       </div>
                       <div class="col-md-4">
                         <div class="testimonial-card d-flex align-items-center">
-                            <img src="{% static 'images/user4.jpg' %}" alt="David L." class="rounded-circle me-3" width="60" height="60">
+                            <img src="{% static 'images/user5.jpg' %}" alt="David L." class="rounded-circle me-3" width="60" height="60">
                             <div>
-                                <p class="fst-italic mb-1">"Reporting incidents has never been easier. Great job!"</p>
-                                <span class="fw-bold">- David L.</span>
+                                <p class="fst-italic mb-1">"Thanks to Community Watch, I can stay updated on local events and incidents. It's a fantastic resource for our community!"</p>
+                                <span class="fw-bold">- Adwoa Owusu</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                       <div class="testimonial-card d-flex align-items-center">
-                          <img src="{% static 'images/user2.jpeg' %}" alt="David L." class="rounded-circle me-3" width="60" height="60">
+                          <img src="{% static 'images/user6.jpeg' %}" alt="David L." class="rounded-circle me-3" width="60" height="60">
                           <div>
-                              <p class="fst-italic mb-1">"Reporting incidents has never been easier. Great job!"</p>
-                              <span class="fw-bold">- David L.</span>
+                              <p class="fst-italic mb-1">"The Community Watch app has been a game changer for our neighborhood. I feel safer knowing I can report incidents quickly!"</p>
+                              <span class="fw-bold">- Samuel Nkrumah</span>
                           </div>
                       </div>
                   </div>
@@ -419,7 +419,7 @@
         }
     });
 
-    {% comment %} Testimonies {% endcomment %}
+    {% comment %} TESTIMINIES {% endcomment %}
     document.addEventListener('DOMContentLoaded', function() {
       var testimonialCarousel = new bootstrap.Carousel(document.getElementById('testimonialCarousel'), {
           interval: 5000,
@@ -428,4 +428,179 @@
       });
     });
 </script>
+
+{% comment %} CONTACT US {% endcomment %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">Contact Us</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <form>
+                <div class="mb-3">
+                    <label for="fullName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="fullName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" class="form-control" id="subject" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h4 class="text-center">Our Location</h4>
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.123456789012!2d-1.6174396851234567!3d6.688200895123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNDcnMjMuMyJOIDHwn5nwn5nwn5n!5e0!3m2!1sen!2sgh!4v1631234567890!5m2!1sen!2sgh" 
+                width="100%" 
+                height="300" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+        </div>
+    </div>
+</div>
+
+{% comment %} FOOTER {% endcomment %}
+<footer
+            class="text-center text-lg-start text-dark"
+            style="background-color: #ECEFF1"
+            >
+        <!-- Section: Social media -->
+        <section
+                 class="d-flex justify-content-between p-4 text-white"
+                 style="background-color: #007bff"
+                 >
+            <!-- Left -->
+            <div class="me-5">
+                <span
+                    style="font-weight: 500"
+                >Connect with us on social networks:</span>
+            </div>
+            <!-- Left -->
+
+            <!-- Right -->
+            <div>
+                <a href="https://www.facebook.com" class="text-white me-4" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://x.com/Albert_O_T" class="text-white me-4" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.google.com" class="text-white me-4" target="_blank">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="https://www.instagram.com" class="text-white me-4" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/233501378473" class="text-white me-4" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/albert-opoku-twumasi-a4694b280/" class="text-white me-4" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/oRocket" class="text-white me-4" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold">Community Watch</h6>
+                        <hr
+                            class="mb-4 mt-0 d-inline-block mx-auto"
+                            style="width: 60px; background-color: #7c4dff; height: 2px"
+                            />
+                        <p>
+                            Join us in keeping our community safe and informed. Together, we can make a difference.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold">Resources</h6>
+                        <hr
+                            class="mb-4 mt-0 d-inline-block mx-auto"
+                            style="width: 60px; background-color: #7c4dff; height: 2px"
+                            />
+                        <p>
+                            <a href="#!" class="text-dark">Safety Tips</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-dark">Community Events</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-dark">Report an Incident</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-dark">Contact Us</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold">Get Involved</h6>
+                        <hr
+                            class="mb-4 mt-0 d-inline-block mx-auto"
+                            style="width: 60px; background-color: #7c4dff; height: 2px"
+                            />
+                        <p>
+                            <a href="#!" class="text-dark">Volunteer</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-dark">Join a Meeting</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-dark">Become a Leader</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-dark">Feedback</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold">Contact Us</h6>
+                        <hr
+                            class="mb-4 mt-0 d-inline-block mx-auto"
+                            style="width: 60px; background-color: #7c4dff; height: 2px"
+                            />
+                        <p><i class="fas fa-home mr-3"></i> Kumasi, Ghana</p>
+                        <p><i class="fas fa-envelope mr-3"></i> info@neighborhoodwatch.com</p>
+                        <p><i class="fas fa-phone mr-3"></i> +233 501 378 473</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div
+             class="text-center p-3"
+             style="background-color: rgba(0, 0, 0, 0.2)"
+             >
+            © 2024 Community Watch
+        </div>
+        <!-- Copyright -->
+    </footer>
 {% endblock %}
