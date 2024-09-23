@@ -361,7 +361,7 @@
                           <div class="testimonial-card d-flex align-items-center">
                               <img src="{% static 'images/user4.jpg' %}" alt="David L." class="rounded-circle me-3" width="60" height="60">
                               <div>
-                                  <p class="fst-italic mb-1">"I appreciate how easy it is to connect with my neighbors and report issues. This platform truly fosters community spirit!"</p>
+                                  <p class="fst-italic mb-1">"I appreciate how easy it is to connect with my neighbors and report issues."</p>
                                   <span class="fw-bold">- Matthew Osei</span>
                               </div>
                           </div>
@@ -370,7 +370,7 @@
                         <div class="testimonial-card d-flex align-items-center">
                             <img src="{% static 'images/user5.jpg' %}" alt="David L." class="rounded-circle me-3" width="60" height="60">
                             <div>
-                                <p class="fst-italic mb-1">"Thanks to Community Watch, I can stay updated on local events and incidents. It's a fantastic resource for our community!"</p>
+                                <p class="fst-italic mb-1">"Thanks to this platform, I can stay updated on local events and incidents."</p>
                                 <span class="fw-bold">- Adwoa Owusu</span>
                             </div>
                         </div>
@@ -379,7 +379,7 @@
                       <div class="testimonial-card d-flex align-items-center">
                           <img src="{% static 'images/user6.jpeg' %}" alt="David L." class="rounded-circle me-3" width="60" height="60">
                           <div>
-                              <p class="fst-italic mb-1">"The Community Watch app has been a game changer for our neighborhood. I feel safer knowing I can report incidents quickly!"</p>
+                              <p class="fst-italic mb-1">"With Community Watch, I feel safer knowing I can report incidents quickly!"</p>
                               <span class="fw-bold">- Samuel Nkrumah</span>
                           </div>
                       </div>
@@ -399,42 +399,13 @@
       </div>
   </div>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const incidentItems = document.querySelectorAll('.incident-item');
-        
-        incidentItems.forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                this.style.backgroundColor = getRandomColor();
-            });
-            
-            item.addEventListener('mouseleave', function() {
-                this.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
-            });
-        });
-
-        function getRandomColor() {
-            const hue = Math.floor(Math.random() * 360);
-            return `hsla(${hue}, 70%, 80%, 0.9)`;
-        }
-    });
-
-    {% comment %} TESTIMINIES {% endcomment %}
-    document.addEventListener('DOMContentLoaded', function() {
-      var testimonialCarousel = new bootstrap.Carousel(document.getElementById('testimonialCarousel'), {
-          interval: 5000,
-          wrap: true,
-          touch: true
-      });
-    });
-</script>
 
 {% comment %} CONTACT US {% endcomment %}
 <div class="container my-5">
     <h2 class="text-center mb-4">Contact Us</h2>
     <div class="row">
         <div class="col-md-6">
-            <form>
+            <form onsubmit="sendEmail(event)">
                 <div class="mb-3">
                     <label for="fullName" class="form-label">Full Name</label>
                     <input type="text" class="form-control" id="fullName" required>
@@ -460,6 +431,34 @@
                 allowfullscreen="" 
                 loading="lazy">
             </iframe>
+        </div>
+    </div>
+</div>
+
+{% comment %} EMERGENCY CONTACTS {% endcomment %}
+<div class="container my-4">
+    <h2 class="text-center mb-1">Emergency Contacts</h2>
+    <div class="row text-center" style="margin-top: -40px; margin-bottom: 50px;">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary d-flex align-items-center justify-content-center" style="padding-top: 15px; cursor: pointer;">
+                <div class="card-body">
+                    <h4 class="card-title mb-0">Police: 191</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-danger d-flex align-items-center justify-content-center" style="padding-top: 15px; cursor: pointer;">
+                <div class="card-body">
+                    <h4 class="card-title mb-0">Fire Service: 192</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success d-flex align-items-center justify-content-center" style="padding-top: 15px; cursor: pointer;">
+                <div class="card-body">
+                    <h4 class="card-title mb-0">Ambulance Service: 193</h4>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -603,4 +602,43 @@
         </div>
         <!-- Copyright -->
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const incidentItems = document.querySelectorAll('.incident-item');
+            
+            incidentItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = getRandomColor();
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+                });
+            });
+    
+            function getRandomColor() {
+                const hue = Math.floor(Math.random() * 360);
+                return `hsla(${hue}, 70%, 80%, 0.9)`;
+            }
+        });
+    
+        {% comment %} TESTIMINIES {% endcomment %}
+        document.addEventListener('DOMContentLoaded', function() {
+          var testimonialCarousel = new bootstrap.Carousel(document.getElementById('testimonialCarousel'), {
+              interval: 5000,
+              wrap: true,
+              touch: true
+          });
+        });
+
+        function sendEmail(event) {
+            event.preventDefault(); // Prevent form submission
+            const fullName = document.getElementById('fullName').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            const mailtoLink = `mailto:aotwum.at@outlook.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('From: ' + fullName + '\n\n' + message)}`;
+            window.location.href = mailtoLink; // Open mail client
+        }
+    </script>
 {% endblock %}
