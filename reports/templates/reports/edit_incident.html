@@ -1,41 +1,43 @@
 <!-- neighborhood_watch/reports/templates/reports/edit_incident.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Incident</title>
-</head>
-<body>
-    <h1>Edit Incident</h1>
-    <form method="post">
-        {% csrf_token %}
-        <div>
-            <label for="id_title">Title:</label>
-            {{ form.title }}  <!-- Automatically renders the title input -->
-        </div>
-        <div>
-            <label for="id_description">Description:</label>
-            {{ form.description }}  <!-- Automatically renders the description input -->
-        </div>
-        <div>
-            <label for="id_location">Location:</label>
-            {{ form.location }}  <!-- Automatically renders the location input -->
-        </div>
-        <div>
-            <label for="incident.get_status_display">Incident Type:</label>
-            {{ form.status }}  <!-- Automatically renders the statusinput -->
-        </div>
-        <div>
-            <label for="id_incident_type">Incident Type:</label>
-            {{ form.incident_type }}  <!-- Automatically renders the incident type input -->
-        </div>
-        <div>
-            <label for="id_date_occurred">Date Occurred:</label>
-            <input type="datetime-local" name="date_occurred" id="id_date_occurred" required 
-                   value="{{ form.date_occurred.value|date:'Y-m-d\TH:i'|default:'' }}">
-        </div>
-        <button type="submit">Save Changes</button>
-    </form>
-    <a href="{% url 'incident_detail' incident.id %}">Cancel</a>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block content %}
+    <div class="container my-4 bg-light rounded p-4"> <!-- Added Bootstrap classes for styling -->
+        <h2 class="bg-success text-white text-center" style="margin-top: 20px;">Edit Incident</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="row"> <!-- Added row for grid layout -->
+                <div class="col-md-6 mb-3"> <!-- Changed to grid column -->
+                    <label for="id_title" class="form-label"><strong>Title:</strong></label>
+                    {{ form.title|add_class:"form-control w-100" }}  <!-- Added w-100 class -->
+                </div>
+                <div class="col-md-6 mb-3"> <!-- Changed to grid column -->
+                    <label for="id_description" class="form-label"><strong>Description:</strong></label>
+                    {{ form.description|add_class:"form-control w-100" }}  <!-- Added w-100 class -->
+                </div>
+                <div class="col-md-6 mb-3"> <!-- Changed to grid column -->
+                    <label for="id_location" class="form-label"><strong>Location:</strong></label>
+                    {{ form.location|add_class:"form-control w-100" }}  <!-- Added w-100 class -->
+                </div>
+                <div class="col-md-6 mb-3"> <!-- Changed to grid column -->
+                    <label for="incident.get_status_display" class="form-label"><strong>Incident Type:</strong></label>
+                    {{ form.status|add_class:"form-control w-100" }}  <!-- Added w-100 class -->
+                </div>
+                <div class="col-md-6 mb-3"> <!-- Changed to grid column -->
+                    <label for="id_incident_type" class="form-label"><strong>Incident Type:</strong></label>
+                    {{ form.incident_type|add_class:"form-control w-100" }}  <!-- Added w-100 class -->
+                </div>
+                <div class="col-md-6 mb-3"> <!-- Changed to grid column -->
+                    <label for="id_date_occurred" class="form-label"><strong>Date Occurred:</strong></label>
+                    <input type="datetime-local" name="date_occurred" id="id_date_occurred" class="form-control w-100" required 
+                           value="{{ form.date_occurred.value|date:'Y-m-d\TH:i'|default:'' }}"> <!-- Added w-100 class -->
+                </div>
+            </div> <!-- End of row -->
+            <div class="d-flex justify-content-between mt-3"> <!-- Added flexbox for button alignment -->
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a href="{% url 'incident_detail' incident.id %}" class="btn btn-secondary">Cancel</a> <!-- Cancel button -->
+            </div>
+        </form>
+    </div>
+{% endblock %}

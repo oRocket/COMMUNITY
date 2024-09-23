@@ -5,13 +5,13 @@
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-10 col-lg-8">
-        <div class="card shadow-sm">
+        <div class="card shadow-sm" style="margin-top: 80px">
             <div class="card-body" style="margin-top: 20px;">
-                <h2 class="card-title text-center mb-4">Report an Incident</h2>
+                <h2 class="bg-success text-white text-center card-title text-center mb-4">Report an Incident</h2>
                 <form method="post" class="needs-validation" novalidate>
                     {% csrf_token %}
                     <div class="mb-3">
-                        <label for="{{ form.title.id_for_label }}" class="form-label">Title</label>
+                        <label for="{{ form.title.id_for_label }}" class="form-label"><strong>Title</strong></label>
                         {{ form.title|add_class:"form-control" }}
                         {% if form.title.errors %}
                             <div class="invalid-feedback d-block">{{ form.title.errors }}</div>
@@ -19,7 +19,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="{{ form.description.id_for_label }}" class="form-label">Description</label>
+                            <label for="{{ form.description.id_for_label }}" class="form-label"><strong>Description</strong></label>
                             {{ form.description|add_class:"form-control" }}
                             {% if form.description.errors %}
                                 <div class="invalid-feedback d-block">{{ form.description.errors }}</div>
@@ -27,28 +27,28 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="{{ form.location.id_for_label }}" class="form-label">Location</label>
+                                <label for="{{ form.location.id_for_label }}" class="form-label"><strong>Location</strong></label>
                                 {{ form.location|add_class:"form-control" }}
                                 {% if form.location.errors %}
                                     <div class="invalid-feedback d-block">{{ form.location.errors }}</div>
                                 {% endif %}
                             </div>
                             <div class="mb-3">
-                                <label for="{{ form.status.id_for_label }}" class="form-label">Status</label>
+                                <label for="{{ form.status.id_for_label }}" class="form-label"><strong>Status</strong></label>
                                 {{ form.status|add_class:"form-select" }}
                                 {% if form.status.errors %}
                                     <div class="invalid-feedback d-block">{{ form.status.errors }}</div>
                                 {% endif %}
                             </div>
                             <div class="mb-3">
-                                <label for="{{ form.incident_type.id_for_label }}" class="form-label">Incident Type</label>
+                                <label for="{{ form.incident_type.id_for_label }}" class="form-label"><strong>Incident Type</strong></label>
                                 {{ form.incident_type|add_class:"form-select" }}
                                 {% if form.incident_type.errors %}
                                     <div class="invalid-feedback d-block">{{ form.incident_type.errors }}</div>
                                 {% endif %}
                             </div>
                             <div class="mb-3">
-                                <label for="{{ form.date_occurred.id_for_label }}" class="form-label">Date Occurred</label>
+                                <label for="{{ form.date_occurred.id_for_label }}" class="form-label"><strong>Date Occurred</strong></label>
                                 {{ form.date_occurred|add_class:"form-control" }}
                                 {% if form.date_occurred.errors %}
                                     <div class="invalid-feedback d-block">{{ form.date_occurred.errors }}</div>
