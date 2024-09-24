@@ -54,5 +54,9 @@ The Neighborhood Watch App is designed to help communities report and manage inc
 ## Contributing
 Contributions are welcome! Please open an issue or submit a pull request for any enhancements or bug fixes.
 
+## Author
+Albert Opoku-Twumasi
+[Your GitHub Profile](https://github.com/oRocket)
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
