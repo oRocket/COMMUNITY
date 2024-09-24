@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container my-4 bg-light rounded">
     <div class="bg-success text-white text-center rounded-top"> <!-- Added a new div for the title background -->
-        <h2 style="margin: 0; margin-top: 70px; padding-bottom: 8px;">{{ incident.title }}</h2> <!-- Removed margin for better alignment -->
+        <h3 style="margin: 0; margin-top: 80px; padding-bottom: 8px;">{{ incident.title }}</h3> <!-- Removed margin for better alignment -->
     </div>
     <div class="row mb-3">
         <div class="col-md-6">
@@ -17,7 +17,7 @@
             <h4><strong>Status:</strong> {{ incident.status }}</h4>
             <h4><strong>Date Occurred:</strong> {{ incident.date_occurred|date:"F d, Y g:i A" }}</h4>
             <h4><strong>Date Reported:</strong> {{ incident.date_reported|date:"F d, Y g:i A" }}</h4>
-            <h4><strong>Reviewed by:</strong> {{ incident.reviewed_by.username }}</h4>
+            <h4><strong>Reviewed by:</strong> {{ incident.reviewed_by.get_full_name }} </h4>
         </div>
     </div>
 

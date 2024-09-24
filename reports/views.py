@@ -84,20 +84,23 @@ def is_community_leader(user):
 
 @user_passes_test(is_community_leader)
 def leader_dashboard(request):
-    pending_reports = Incident.objects.filter(status='pending')
-    active_reports = Incident.objects.filter(status__in=['approved', 'escalated'])
-    resolved_reports = Incident.objects.filter(status='resolved')
+    pending_reports = Incident.objects.filter(status='pending').order_by('-date_reported')
+    active_reports = Incident.objects.filter(status__in=['approved', 'escalated']).order_by('-date_reported')
+    resolved_reports = Incident.objects.filter(status='resolved').order_by('-date_reported')
+    rejected_reports = Incident.objects.filter(status='rejected').order_by('-date_reported')
 
     context = {
         'pending_reports': pending_reports,
         'active_reports': active_reports,
         'resolved_reports': resolved_reports,
+        'rejected_reports': rejected_reports,
     }
     return render(request, 'reports/leader_dashboard.html', context)
 
 @user_passes_test(is_community_leader)
 def review_report(request, incident_id):
     incident = get_object_or_404(Incident, id=incident_id)
+    
     if request.method == 'POST':
         action = request.POST.get('action')
         if action in ['approve', 'reject', 'escalate', 'resolve']:
@@ -105,7 +108,9 @@ def review_report(request, incident_id):
             incident.reviewed_by = request.user
             incident.save()
             # TODO: Add logic to send email/SMS for escalation
-        return redirect('leader_dashboard')
+            return redirect('leader_dashboard')
+    
+    # Pass the incident and the form to the template
     return render(request, 'reports/review_report.html', {'incident': incident})
 
 # View to edit an incident

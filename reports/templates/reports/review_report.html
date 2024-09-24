@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-4">
+    <h3 class="mb-4 bg-success text-white text-center rounded-top" style="margin: 0; margin-top: 80px; padding-bottom: 8px;">Review Incident Report</h3>
+    
+    <div class="card mb-2">
+        <div class="card-body">
+            <h4 class="card-title"><strong>Title:</strong> {{ incident.title }}</h4>
+            <h5 class="card-subtitle mb-2 text-muted"><strong>Reported by:</strong> {{ incident.reported_by.username }}</h5>
+            <p class="card-text"><strong>Description:</strong> {{ incident.description }}</p>
+            <p class="card-text"><strong>Location:</strong> {{ incident.location }}</p>
+            <p class="card-text"><strong>Type:</strong> {{ incident.incident_type }}</p>
+            <p class="card-text"><strong>Status:</strong> {{ incident.status }}</p>
+            <p class="card-text"><strong>Date Occurred:</strong> {{ incident.date_occurred|date:"F d, Y g:i A" }}</p>
+            <p class="card-text"><strong>Date Reported:</strong> {{ incident.date_reported|date:"F d, Y g:i A" }}</p>
+            <p class="card-text"><strong>Reviewed by:</strong> {{ incident.reviewed_by.get_full_name }}</p>
+        </div>
+    </div>
+
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="action" class="form-label">Select Status:</label>
+            <select name="action" id="action" class="form-select">
+                <option value="approve">Approve</option>
+                <option value="reject">Reject</option>
+                <option value="escalate">Escalate</option>
+                <option value="resolve">Resolve</option>
+            </select>
+        </div>
+        
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Update Status</button>
+            <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

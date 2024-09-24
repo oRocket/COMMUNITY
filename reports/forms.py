@@ -30,3 +30,13 @@ class EditIncidentForm(forms.ModelForm):
     class Meta:
         model = Incident
         fields = ['title', 'description', 'location', 'status', 'incident_type', 'date_occurred']
+        
+
+# neighborhood_watch/reports/forms.py
+from django import forms
+from .models import Incident
+
+class IncidentStatusForm(forms.ModelForm):
+    class Meta:
+        model = Incident
+        fields = ['status']

@@ -1,32 +1,58 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Community Leader Dashboard</h1>
+<div class="container my-4">
+    <h3 class="bg-success text-white text-center rounded-top" style="margin-top: 70px; padding-bottom: 8px;">Community Leader</h3>
+    <h4>Welcome, Community Leader {{ user.first_name }} {{ user.middle_name }} {{ user.last_name }}!</h4>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Pending Reports</h4>
+            <ul class="list-group mb-4">
+            {% for report in pending_reports %}
+                <li class="list-group-item">
+                    <a href="{% url 'review_report' report.id %}">{{ report.title }}</a> - {{ report.date_reported|date:"F d, Y H:i" }}
+                </li>
+            {% empty %}
+                <li class="list-group-item">No pending reports.</li>
+            {% endfor %}
+            </ul>
 
-<h2>Pending Reports</h2>
-<ul>
-{% for report in pending_reports %}
-    <li><a href="{% url 'review_report' report.id %}">{{ report.title }}</a> - {{ report.date_reported|date:"F d, Y H:i" }}</li>
-{% empty %}
-    <li>No pending reports.</li>
-{% endfor %}
-</ul>
+            <h4>Active Reports</h4>
+            <ul class="list-group mb-4">
+            {% for report in active_reports %}
+                <li class="list-group-item">
+                    <a href="{% url 'review_report' report.id %}">{{ report.title }}</a> - {{ report.get_status_display }}
+                </li>
+            {% empty %}
+                <li class="list-group-item">No active reports.</li>
+            {% endfor %}
+            </ul>
 
-<h2>Active Reports</h2>
-<ul>
-{% for report in active_reports %}
-    <li><a href="{% url 'review_report' report.id %}">{{ report.title }}</a> - {{ report.get_status_display }}</li>
-{% empty %}
-    <li>No active reports.</li>
-{% endfor %}
-</ul>
+            <h4>Rejected Reports</h4>
+            <ul class="list-group mb-4">
+            {% for report in rejected_reports %}
+                <li class="list-group-item">
+                    <a href="{% url 'review_report' report.id %}">{{ report.title }}</a> - {{ report.date_reported|date:"F d, Y H:i" }}
+                </li>
+            {% empty %}
+                <li class="list-group-item">No rejected reports.</li>
+            {% endfor %}
+            </ul>
+        </div>
 
-<h2>Resolved Reports</h2>
-<ul>
-{% for report in resolved_reports %}
-    <li>{{ report.title }} - Resolved on {{ report.reviewed_by.date_joined|date:"F d, Y" }}</li>
-{% empty %}
-    <li>No resolved reports.</li>
-{% endfor %}
-</ul>
+        <div class="col-md-6">
+            <h4>Resolved Reports</h4>
+            <ul class="list-group mb-4">
+            {% for report in resolved_reports %}
+                <li class="list-group-item">
+                    <a href="{% url 'review_report' report.id %}">{{ report.title }}</a> - Resolved on {{ report.reviewed_by.date_joined|date:"F d, Y" }}
+                </li>
+            {% empty %}
+                <li class="list-group-item">No resolved reports.</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}
