@@ -133,5 +133,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'dashboard'  # Redirect to the home page after login
 
 # Add or update these settings
-SESSION_COOKIE_AGE = 1800  # Set session timeout to 30 minutes (1800 seconds)
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Expire session when the browser is closed
+SESSION_COOKIE_AGE = 300  # Set session timeout to 5 minutes (300 seconds)
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Expire session when the browser is closed
