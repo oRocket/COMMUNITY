@@ -1,7 +1,7 @@
 # Community Watch App
 
 ## Homepage Screenshot
-![Homepage](images/homepage.jpg)
+![Homepage](static/images/homepage.jpg)
 
 ## Overview
 The Community Watch App is designed to help communities report and manage incidents effectively. Users can report incidents, view reported incidents, and receive notifications about new reports.
