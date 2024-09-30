@@ -1,7 +1,11 @@
-# Neighborhood Watch App
+# Community Watch App
 
 ## Overview
-The Neighborhood Watch App is designed to help communities report and manage incidents effectively. Users can report incidents, view reported incidents, and receive notifications about new reports.
+The Community Watch App is designed to help communities report and manage incidents effectively. Users can report incidents, view reported incidents, and receive notifications about new reports.
+
+
+## Access the App
+You can access the live version of the Community Watch App at [Community Watch](https://orocket.pythonanywhere.com/).
 
 ## Features
 - User authentication
@@ -19,7 +23,7 @@ The Neighborhood Watch App is designed to help communities report and manage inc
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/neighborhood_watch.git
+   git clone https://github.com/oRocket/neighborhood_watch.git
    cd neighborhood_watch
    ```
 
