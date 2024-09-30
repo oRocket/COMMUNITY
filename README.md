@@ -1,4 +1,4 @@
-# Community Watch App
+# Community Watch
 
 ## Homepage
 ![Homepage](static/images/homepage.jpg)
@@ -7,7 +7,7 @@
 The Community Watch App is designed to help communities report and manage incidents effectively. Users can report incidents, view reported incidents, and receive notifications about new reports.
 
 
-## Access the App
+## Access the Live Version
 You can access the live version of the Community Watch App at [Community Watch](https://orocket.pythonanywhere.com/).
 
 ## Features
