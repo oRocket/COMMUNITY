@@ -1,6 +1,6 @@
 # Community Watch App
 
-## Homepage Screenshot
+## Homepage
 ![Homepage](static/images/homepage.jpg)
 
 ## Overview
@@ -27,7 +27,6 @@ You can access the live version of the Community Watch App at [Community Watch](
 1. Clone the repository:
    ```bash
    git clone https://github.com/oRocket/COMMUNITY.git
-   cd neighborhood_watch
    ```
 
 2. Create a virtual environment:
