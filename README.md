@@ -1,5 +1,8 @@
 # Community Watch App
 
+## Homepage Screenshot
+![Homepage](images/homepage.jpg)
+
 ## Overview
 The Community Watch App is designed to help communities report and manage incidents effectively. Users can report incidents, view reported incidents, and receive notifications about new reports.
 
@@ -60,7 +63,7 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 
 ## Author
 Albert Opoku-Twumasi
-[Your GitHub Profile](https://github.com/oRocket)
+[GitHub Profile](https://github.com/oRocket)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
